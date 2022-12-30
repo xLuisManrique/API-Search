@@ -1,0 +1,49 @@
+<div>
+
+<div class=" border-bottom animated fadeIn">
+  <div class="animated fadeIn py-3">
+      <div class="container px-5">
+        <div class="row gx-5 justify-content-center">
+          <div class="text-center">
+            <h1 class="display-5 fw-bolder text-primary mb-2">WikiApi Search</h1>
+              <p class="lead text-black-50 mb-4">This page can use a WikiApi to Search anything that you want</p>
+          </div>
+                <hr>
+  <div class="search-form">
+    <form (submit)="onSubmit()">
+      <div class="input-group">
+        <input [(ngModel)]="searchTerm"
+                type="text"
+                name="search"
+                class="form-control input-lg rounded-pill">
+          <div class="input-group-btn ms-3">
+            <button class="btn btn-lg btn-primary">
+                      Search
+            </button>
+          </div>
+      </div>
+    </form>
+    <hr>
+
+              <!-- ARTICLE -->
+    <article class="article"
+            *ngFor="let result of results | paginate: { itemsPerPage: 10, currentPage: page, totalItems: totalResults }"
+            class="search-result mt-3">
+      <a 
+      href="https://en.wikipedia.org/wiki?curid={{result.pageid}}"
+      class="search-link">https://es.wikipedia.org/wiki?curid={{result.pageid}}
+      </a>
+
+      <h4><a href="https://es.wikipedia.org/wiki?curid={{result.pageid}}">{{result.title}}</a></h4>
+      <p [innerHtml]="result.snippet"></p>
+    </article>
+          
+    <div class="text-center" *ngIf="results.length > 10">
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    </div>
+
+        </div>
+      </div>
+    </div>
+  </div>   
+</div>
